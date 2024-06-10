@@ -1,0 +1,23 @@
+body{
+    padding: 20px 40px;
+}
+
+ul li{
+    background: rgb(212, 202, 202);
+    padding: 10px;
+    list-style: none;
+    width: 400px;
+    margin-bottom: 10px;
+}
+
+ul li .edit{
+    display: none;
+}
+
+ul li.edit .edit{
+    display: initial;
+}
+
+ul li.edit .noEdit{
+    display: none;
+}

@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'jquery_ajax_app/css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>JQUERY AJAX</title>
+</head>
+<body>
+    
+    <h1>AJAX TUTORIA</h1>
+
+    <h2>Coffee Orders</h2>
+    <ul id="orders"> </ul>
+
+    <template id="order-template">
+        <li data-id="{{id}}">
+            <p>
+                <strong>Name:</strong>
+                <span class="noEdit name">{{name}}</span> 
+                <input class="edit name" />
+            </p>
+            <p>
+                <strong>Drink:</strong>
+                <span class="noEdit drink">{{drink}}</span> 
+                <input class="edit drink" />
+            </p>
+            <button data-id='{{id}}' class='remove'>X</button>
+            <button class='editOrder noEdit'>Edit</button>
+            <button data-id='{{id}}' class='saveEdit edit'>Save</button>
+            <button class='cancleEdit edit'>Cancle</button>
+        </li>
+    </template>
+
+    <h4>Add a Coffee order</h4>
+    <p>name: <input type="text" id="name"> </p>
+    <p>drink: <input type="text" id="drink"> </p>
+    <button id="add-order">Add!</button>
+
+ 
+   
+    <script src="{% static 'jquery_ajax_app/js/main.js' %}"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.0/mustache.js"></script>
+
+</body>
+</html>
