@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from .models import Post
 
+from django.http import JsonResponse
+from rest_framework.exceptions import ValidationError
+
 from jquery_ajax_app.serializer import PostSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
+
 # Create your views here.
 
 class PostView(APIView):
@@ -19,7 +23,9 @@ class PostView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors)
+        # return Response(serializer.errors)
+        else:
+            return JsonResponse({'errors': serializer.errors}, status=400)
     
     def put(self, request):
         data = request.data

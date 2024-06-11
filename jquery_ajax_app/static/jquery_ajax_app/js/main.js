@@ -13,7 +13,7 @@ $(document).ready(function(){
     "<button data-id='{{id}}' class='remove'>X</button>" +
     "<button class='editOrder noEdit'>Edit</button>"+
     "<button data-id='{{id}}' class='saveEdit edit'>Save</button>"+
-    "<button class='cancleEdit edit'>Cancle</button>"+
+    "<button class='cancelEdit edit'>Cancel</button>"+
     "</li>";
 
     function addOrder(order){
@@ -51,6 +51,16 @@ $(document).ready(function(){
             },
             error: function(){
                 alert('error saving order')
+            },
+            error: function(xhr, status, error) {
+                var jsonResponse = JSON.parse(xhr.responseText);
+                if (jsonResponse.errors) {
+                    var errorMessage = "";
+                    $.each(jsonResponse.errors, function(key, value) {
+                        errorMessage += value.join(", ") + "\n";
+                    });
+                    alert(errorMessage);
+                }
             }
         })
     });
@@ -83,7 +93,7 @@ $(document).ready(function(){
         $li.addClass('edit');
     })
 
-    $orders.delegate('.cancleEdit', 'click', function(){
+    $orders.delegate('.cancelEdit', 'click', function(){
         $(this).closest('li').removeClass('edit');
     })
 
