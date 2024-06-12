@@ -12,7 +12,7 @@ $(document).ready(function(){
     "<p><strong>Drink:</strong> <span class='noEdit drink'>{{drink}}</span><input class='edit drink' /></p>" +
     "<button data-id='{{id}}' class='remove'>X</button>" +
     "<button class='editOrder noEdit'>Edit</button>"+
-    "<button data-id='{{id}}' class='saveEdit edit'>Save</button>"+
+    "<button class='saveEdit edit'>Save</button>"+
     "<button class='cancelEdit edit'>Cancel</button>"+
     "</li>";
 
@@ -47,7 +47,7 @@ $(document).ready(function(){
             url: '/api/post/',
             data: order,
             success: function(newOrder){
-                addOrder(order)
+                addOrder(newOrder)
             },
             error: function(){
                 alert('error saving order')
@@ -101,13 +101,13 @@ $(document).ready(function(){
         var $li = $(this).closest('li');
         var dataId = $(this).attr('data-id')
         var order = {
+            id: dataId,
             name: $li.find('input.name').val(),
             drink: $li.find('input.drink').val()
-        }
+        };
         $.ajax({
             type: 'PUT',
             url: '/api/post/',
-            data: { id: dataId },
             data: order,
             success: function(newOrder) {
                 $li.find('span.name').html(order.name);
