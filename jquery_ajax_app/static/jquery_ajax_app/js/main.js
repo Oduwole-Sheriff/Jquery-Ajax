@@ -12,7 +12,7 @@ $(document).ready(function(){
     "<p><strong>Drink:</strong> <span class='noEdit drink'>{{drink}}</span><input class='edit drink' /></p>" +
     "<button data-id='{{id}}' class='remove'>X</button>" +
     "<button class='editOrder noEdit'>Edit</button>"+
-    "<button class='saveEdit edit'>Save</button>"+
+    "<button data-id='{{id}}' class='saveEdit edit'>Save</button>"+
     "<button class='cancelEdit edit'>Cancel</button>"+
     "</li>";
 

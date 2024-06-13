@@ -29,7 +29,8 @@ class PostView(APIView):
     
     def put(self, request):
         data = request.data
-        serializer = PostSerializer(data = data)
+        objs = Post.objects.get(id = data['id'])
+        serializer = PostSerializer(objs, data = data, partial= True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -37,7 +38,8 @@ class PostView(APIView):
 
     def patch(self, request):
         data = request.data
-        serializer = PostSerializer(data = data)
+        objs = Post.objects.get(id = data['id'])
+        serializer = PostSerializer(objs, data = data, partial= True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

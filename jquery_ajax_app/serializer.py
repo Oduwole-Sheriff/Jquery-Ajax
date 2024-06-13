@@ -16,11 +16,11 @@ class PostSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("A post with this name already exists.")
         return value
 
-    def create(self, validated_data):
-        return Post.objects.create(**validated_data)
+    # def create(self, validated_data):
+    #     return Post.objects.create(**validated_data)
 
-    def update(self, instance, validated_data):
-        instance.name = validated_data.get('name', instance.name)
-        instance.content = validated_data.get('content', instance.content)
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     instance.name = validated_data.get('name', instance.name)
+    #     instance.content = validated_data.get('content', instance.content)
+    #     instance.save()
+    #     return instance
