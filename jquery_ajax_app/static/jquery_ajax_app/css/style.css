@@ -50,6 +50,17 @@ ul li{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    float: right; 
+    display: block; /* Ensure images don't affect inline elements */
+    margin: 0; /* Center align images */
+    margin-top: -80px; /* Add some space below each image */
+}
+
 ul li .edit{
     display: none;
 }
