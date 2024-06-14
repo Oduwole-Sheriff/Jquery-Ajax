@@ -18,7 +18,7 @@
         <h2>Coffee Orders</h2>
         <ul id="orders"> </ul>
     
-        <template id="order-template">
+        <!-- <template id="order-template">
             <li data-id="{{id}}">
                 <p>
                     <strong>Name:</strong>
@@ -33,14 +33,19 @@
                 <button data-id='{{id}}' class='remove'>X</button>
                 <button class='editOrder noEdit'>Edit</button>
                 <button data-id='{{id}}' class='saveEdit edit'>Save</button>
-                <button class='cancleEdit edit'>Cancle</button>
+                <button class='cancelEdit edit'>Cancel</button>
             </li>
-        </template>
+        </template> -->
     
         <h4>Add a Coffee order</h4>
-        <p>name: <input type="text" id="name"> </p>
-        <p>drink: <input type="text" id="drink"> </p>
-        <button id="add-order">Add!</button>
+        <form id="post-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>name: <input type="text" id="name"> </p>
+            <p>drink: <input type="text" id="drink"> </p>
+            <p>Image: <input type="file" id="image" name="image"> </p>
+            <p>Date: <input type="date" id="date" name="date"> </p>
+            <button id="add-order">Add!</button>
+        </form>
 
         <footer>
             <p>&copy; 2024 My Website</p>
