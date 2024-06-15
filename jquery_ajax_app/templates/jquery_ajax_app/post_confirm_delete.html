@@ -1,0 +1,24 @@
+{% extends 'jquery_ajax_app/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+    <div class="create-task">
+        <div class="create-section">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Delete Order</legend>
+                    <h2>Are you sure you want to delete this Order "{{ object.drink }}"</h2>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="from-group">
+                    <button class="btn btn-outline-danger send" type="submit">Yes, Delete</button>
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary send">Cancle</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock content %}

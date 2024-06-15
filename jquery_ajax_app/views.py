@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 
 from django.http import JsonResponse
@@ -8,6 +8,9 @@ from jquery_ajax_app.serializer import PostSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
+
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -52,9 +55,33 @@ class PostView(APIView):
         objs.delete()
         return Response({'message' : 'post deleted'})
 
-def PostListView(request):
-    post = Post.objects.all()
-    context = {
-        'post': post,
-    }
-    return render(request, 'jquery_ajax_app/index.html', context)
+# def PostListView(request):
+#     post = Post.objects.all()
+#     context = {
+#         'post': post,
+#     }
+#     return render(request, 'jquery_ajax_app/index.html', context)
+
+class PostListView(ListView):
+    model = Post
+    template_name = 'jquery_ajax_app/index.html'
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+
+class PostDetailView(DetailView):
+    model = Post
+
+class PostCreateView(CreateView):
+    model = Post
+    fields = ['name', 'drink', 'image']
+
+    def get_success_url(self):
+        return reverse_lazy('home') 
+
+class PostUpdateView(UpdateView):
+    model = Post
+    fields = ['name', 'drink', 'image']
+
+class PostDeleteView(DeleteView):
+    model = Post
+    success_url = reverse_lazy('home')
