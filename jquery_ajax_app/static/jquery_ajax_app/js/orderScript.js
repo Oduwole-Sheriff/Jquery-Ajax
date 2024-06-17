@@ -33,7 +33,6 @@ $(document).ready(function(){
 
         var formData = new FormData(this);
         var progressBar = $('.progress-bar');
-        var progressText = $('.progress-text');
 
         $.ajax({
             type: 'POST',
@@ -53,7 +52,7 @@ $(document).ready(function(){
                         // Update progress bar attributes and style
                         progressBar.attr('aria-valuenow', percentComplete);
                         progressBar.css('width', percentComplete + '%');
-                        progressText.text(percentComplete + '%');
+                        progressBar.text(percentComplete + '%');
                     }
                 }, false);
                 return xhr;
@@ -63,16 +62,16 @@ $(document).ready(function(){
                 $('.progress').removeClass('d-none');
                 progressBar.attr('aria-valuenow', '0');
                 progressBar.css('width', '0%');
-                progressText.text('0%');
+                progressBar.text('0%');
             },
             success: function(data) {
                 // Handle success
-                progressText.text('Order added successfully!');
+                progressBar.text('Order added successfully!');
                 setTimeout(function() {
                     $('.progress').addClass('d-none'); // Hide progress bar after a short delay
                     progressBar.attr('aria-valuenow', '0');
                     progressBar.css('width', '0%');
-                    progressText.text('0%'); // Reset progress text
+                    progressBar.text('0%'); // Reset progress text
                 }, 1000);
 
                 $('#add_order_form')[0].reset(); // Reset the form
@@ -83,7 +82,7 @@ $(document).ready(function(){
             error: function(xhr, status, error) {
                 // Handle error
                 $('.progress').addClass('d-none'); // Hide progress bar on error
-                progressText.text('Error adding order: ' + error);
+                progressBar.text('Error adding order: ' + error);
             }
         });
     });
