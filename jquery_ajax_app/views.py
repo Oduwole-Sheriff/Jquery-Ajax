@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 
 # Create your views here.
@@ -81,7 +81,3 @@ class PostCreateView(CreateView):
 class PostUpdateView(UpdateView):
     model = Post
     fields = ['name', 'drink', 'image']
-
-class PostDeleteView(DeleteView):
-    model = Post
-    success_url = reverse_lazy('home')
