@@ -1,4 +1,4 @@
-
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from rest_framework.exceptions import ValidationError
 
@@ -8,7 +8,6 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 
-# Create your views here.
 
 class PostView(APIView):
     def get(self, request):
