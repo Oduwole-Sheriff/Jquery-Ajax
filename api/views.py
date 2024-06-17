@@ -1,3 +1,4 @@
+import time
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from rest_framework.exceptions import ValidationError
@@ -18,10 +19,10 @@ class PostView(APIView):
     def post(self, request):
         data = request.data
         serializer = PostSerializer(data = data)
+        # time.sleep(20)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        # return Response(serializer.errors)
         else:
             return JsonResponse({'errors': serializer.errors}, status=400)
     
