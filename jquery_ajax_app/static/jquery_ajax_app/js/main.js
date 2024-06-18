@@ -22,22 +22,27 @@ $(document).ready(function(){
     function addOrder(order){
         $orders.append(Mustache.render(orderTemplate, order));
     }
+    
+    
+    function getAllOrders(){
+        $.ajax({
+            type: 'GET',
+            url: '/api/post/',
+            success: function(orders){
+                $.each(orders, function(i, order){
+                    addOrder(order);
+                });
+            },
+            error: function(xhr, status, error) {
+                alert('Error loading orders');
+            }
+        });
+    }
 
-    $.ajax({
-        type: 'GET',
-        url: '/api/post/',
-        success: function(orders){
-            $.each(orders, function(i, order){
-                addOrder(order);
-            });
-        },
-        error: function(xhr, status, error) {
-            alert('Error loading orders');
-        }
-    });
+    getAllOrders();
+
 
     $('#add-order').click(function(event){
-        
         event.preventDefault();
 
         var formData = new FormData();
@@ -71,26 +76,6 @@ $(document).ready(function(){
         });
     });
 
-    // Rest of your event handlers...
-
-    // $orders.on('click', '.remove', function(){
-    //     var dataId = $(this).attr('data-id');
-    //     var $li = $(this).closest('li');
-    //     $.ajax({
-    //         type: 'DELETE',
-    //         url: '/api/post/',
-    //         data: { id: dataId },
-    //         success: function() {
-    //             $li.fadeOut(300, function(){
-    //                 $(this).remove();
-    //                 console.log('Data deleted successfully');
-    //             });
-    //         },
-    //         error: function() {
-    //             console.error('Error deleting data');
-    //         }
-    //     });
-    // });
 
     $search_nav.on('click', '.remove', function(){
         var dataId = $(this).attr('data-id');

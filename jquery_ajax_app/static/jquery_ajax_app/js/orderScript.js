@@ -74,10 +74,13 @@ $(document).ready(function(){
                     progressBar.text('0%'); // Reset progress text
                 }, 1000);
 
-                $('#add_order_form')[0].reset(); // Reset the form
+                $('#add_order_form').trigger('reset'); // Reset the form
 
                 // Optionally, update UI or perform other actions with 'data'
-                // addOrder(data);
+                // getAllOrders();
+
+                // close the modal
+                $('#addOrderModal').modal('hide');
             },
             error: function(xhr, status, error) {
                 // Handle error
@@ -87,7 +90,6 @@ $(document).ready(function(){
         });
     });
 });
-
 
 
 
