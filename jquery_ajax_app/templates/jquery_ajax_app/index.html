@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
 
+{% include 'jquery_ajax_app/order_modals.html' %}
+
     <div class="main-background">
         <div class="search-nav">
             <div class="search-box">
@@ -32,7 +34,8 @@
                 <p>Set the goals to grow your company</p>
             </div>
             <div class="manage-task-btn">
-                <a href="{% url 'new-order' %}"> ADD ORDER </a>
+                {% comment %} <a href="{% url 'new-order' %}"> ADD ORDER </a> {% endcomment %}
+                <a href="#" id="addOrderBtn"> ADD ORDER </a>
             </div>
         </div>
 
@@ -51,5 +54,8 @@
             </div>
         {% endfor %}
     </div>
+
+    
+    <script src="{% static 'jquery_ajax_app/js/add.order.js' %}"></script>
 
 {% endblock %}
