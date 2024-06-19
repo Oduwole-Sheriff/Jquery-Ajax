@@ -34,5 +34,5 @@ $(document).ready(function(){
                 alert('Error adding order: ' + error);
             }
         });
-    });
+    });     
 });

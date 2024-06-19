@@ -3,6 +3,8 @@
 {% block content %}
 
 {% include 'jquery_ajax_app/order_modals.html' %}
+{% include 'jquery_ajax_app/update_modals.html' %}
+{% include 'jquery_ajax_app/view_modals.html' %}
 
     <div class="main-background">
         <div class="search-nav">
@@ -44,7 +46,12 @@
                 <div class="post">
                         <img src="{{ post.image.url }}" alt="post">
                         <div class="post-text">
-                            <h4> <a href="{% url 'order-detail' post.id %}"> {{ post.name }} - Ordered ({{ post.drink }})</a></h4>
+                            {% comment %} <h4> <a href="{% url 'order-detail' post.id %}"> {{ post.name }} - Ordered ({{ post.drink }})</a></h4> {% endcomment %}
+                            <h4> <a href="#" onclick="javascript: 
+                                document.getElementById('modalName').textContent = '{{ post.name }}';
+                                document.getElementById('modalDrink').textContent = '{{ post.drink }}';
+                                var modal = new bootstrap.Modal(document.getElementById('showOrderModal'));
+                                modal.show();"> {{ post.name }} - Ordered ({{ post.drink }})</a></h4>
                             <p class="text-muted">{{ post.date_posted|date:"F d, Y" }}</p>
                         </div>
                     </div>
@@ -56,6 +63,8 @@
     </div>
 
     
-    <script src="{% static 'jquery_ajax_app/js/add.order.js' %}"></script>
+    <script src="{% static 'jquery_ajax_app/js/order/add.order.js' %}"></script>
+    <script src="{% static 'jquery_ajax_app/js/order/update_order.js' %}"></script>
+    <script src="{% static 'jquery_ajax_app/js/order/delete_order.js' %}"></script>
 
 {% endblock %}

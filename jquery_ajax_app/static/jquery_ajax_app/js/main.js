@@ -5,7 +5,6 @@ $(document).ready(function(){
     var $drink = $('#drink');
     var $image = $('#image');
     var $date = $('#date');
-    var $search_nav = $('.search-nav')
 
     var orderTemplate = "" +
     "<li data-id='{{id}}'>" +
@@ -75,32 +74,6 @@ $(document).ready(function(){
             }
         });
     });
-
-
-    $search_nav.on('click', '.remove', function(){
-        var dataId = $(this).attr('data-id');
-        var $search_nav = $(this).closest('.search-nav');
-
-        const confirmDelete = confirm('Are you sure you want to delete this item?')
-
-        if(confirmDelete === true){
-            $.ajax({
-                type: 'DELETE',
-                url: '/api/post/',
-                data: { id: dataId },
-                success: function(){
-                    $search_nav.fadeOut(300, function(){
-                        $(this).remove();
-                        console.log('Data deleted successfully');
-                    });
-                },
-                error: function() {
-                    console.error('Error deleting data');
-                },
-            });
-        }
-    })
-
 
 
     $orders.on('click', '.editOrder', function(){
