@@ -1,7 +1,18 @@
+import {getAllOrders} from '../main.js'
+
+
+
 $(document).ready(function(){
+
+    function fetchOrderFromBackend(){
+        getAllOrders();
+    }
+    
+    
     $('#addOrderBtn').click(function(){
         $('#addOrderModal').modal('show');
     });
+
 
     $('#add_order_form').submit(function(e){
         e.preventDefault();
@@ -19,14 +30,14 @@ $(document).ready(function(){
             success: function(data) {
                 // Handle success 
 
-                $('#add_order_form').trigger('reset'); // Reset the form
+                $('#addOrderModal').modal('hide'); // close the modal
 
-                // close the modal
-                $('#addOrderModal').modal('hide');
+                $('#add_order_form').trigger('reset'); // Reset the form
                 
                 alert('Order added successfully!');
 
                 // add code to populate the orderlist
+                fetchOrderFromBackend();
 
             },
             error: function(xhr, status, error) {

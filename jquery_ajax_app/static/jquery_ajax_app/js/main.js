@@ -1,42 +1,50 @@
-$(document).ready(function(){
 
+var $orders = $('#orders');
+
+var orderTemplate = "" +
+"<li data-id='{{id}}'>" +
+"<p><strong>Name:</strong> <span class='noEdit name'>{{name}}</span><input class='edit name' /></p>" +
+"<p><strong>Drink:</strong> <span class='noEdit drink'>{{drink}}</span><input class='edit drink' /></p>" +
+"<img src='{{image}}'></img>" +
+"<p><strong>Date:</strong> <span class='noEdit date'>{{date}}</span><input class='edit date' /></p>" +
+"<button data-id='{{id}}' class='remove'>X</button>" +
+"<button class='editOrder noEdit'>Edit</button>"+
+"<button data-id='{{id}}' class='saveEdit edit'>Save</button>"+
+"<button class='cancelEdit edit'>Cancel</button>"+
+"</li>";
+
+function addOrder(order){
+    $orders.append(Mustache.render(orderTemplate, order));
+} 
+
+
+export function getAllOrders(){
+    $.ajax({
+        type: 'GET',
+        url: '/api/post/',
+        success: function(orders){
+            $.each(orders, function(i, order){
+                addOrder(order);
+            });
+        },
+        error: function(xhr, status, error) {
+            alert('Error loading orders');
+        }
+    });
+}
+
+
+
+
+$(document).ready(function(){
     var $orders = $('#orders');
     var $name = $('#name');
     var $drink = $('#drink');
     var $image = $('#image');
     var $date = $('#date');
 
-    var orderTemplate = "" +
-    "<li data-id='{{id}}'>" +
-    "<p><strong>Name:</strong> <span class='noEdit name'>{{name}}</span><input class='edit name' /></p>" +
-    "<p><strong>Drink:</strong> <span class='noEdit drink'>{{drink}}</span><input class='edit drink' /></p>" +
-    "<img src='{{image}}'></img>" +
-    "<p><strong>Date:</strong> <span class='noEdit date'>{{date}}</span><input class='edit date' /></p>" +
-    "<button data-id='{{id}}' class='remove'>X</button>" +
-    "<button class='editOrder noEdit'>Edit</button>"+
-    "<button data-id='{{id}}' class='saveEdit edit'>Save</button>"+
-    "<button class='cancelEdit edit'>Cancel</button>"+
-    "</li>";
-
-    function addOrder(order){
-        $orders.append(Mustache.render(orderTemplate, order));
-    }
     
     
-    function getAllOrders(){
-        $.ajax({
-            type: 'GET',
-            url: '/api/post/',
-            success: function(orders){
-                $.each(orders, function(i, order){
-                    addOrder(order);
-                });
-            },
-            error: function(xhr, status, error) {
-                alert('Error loading orders');
-            }
-        });
-    }
 
     getAllOrders();
 
