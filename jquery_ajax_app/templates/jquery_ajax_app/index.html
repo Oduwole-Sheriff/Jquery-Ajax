@@ -41,25 +41,33 @@
             </div>
         </div>
 
-        {% for post in posts %}
-            <div class="search-nav">
+        <div class="only-post">
+            {% for post in posts %}
+            <div class="search-nav" data-id="{{ post.id }}">
                 <div class="post">
-                        <img src="{{ post.image.url }}" alt="post">
-                        <div class="post-text">
-                            {% comment %} <h4> <a href="{% url 'order-detail' post.id %}"> {{ post.name }} - Ordered ({{ post.drink }})</a></h4> {% endcomment %}
-                            <h4> <a href="#" onclick="javascript: 
+                    <img src="{{ post.image.url }}" alt="post">
+                    <div class="post-text">
+                        {% comment %} <h4> <a href="{% url 'order-detail' post.id %}"> {{ post.name }} - Ordered ({{ post.drink }})</a></h4> {% endcomment %}
+                        <h4>
+                            <a href="#" onclick="javascript: 
                                 document.getElementById('modalName').textContent = '{{ post.name }}';
                                 document.getElementById('modalDrink').textContent = '{{ post.drink }}';
+                                document.getElementById('modalId').textContent = '{{ post.id }}';
                                 var modal = new bootstrap.Modal(document.getElementById('showOrderModal'));
-                                modal.show();"> {{ post.name }} - Ordered ({{ post.drink }})</a></h4>
-                            <p class="text-muted">{{ post.date_posted|date:"F d, Y" }}</p>
-                        </div>
+                                modal.show();">
+                                {{ post.name }} - {{ post.drink }}
+                            </a>
+                        </h4>
+                        <p class="text-muted">{{ post.date_posted|date:"F d, Y" }}</p>
                     </div>
+                </div>
                 <div class="post-btn">
-                <a href="#" data-id='{{post.id}}' class="remove"> Delete </a>
+                    <a href="#" data-id='{{ post.id }}' class="remove"> Delete </a>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+        
     </div>
 
     

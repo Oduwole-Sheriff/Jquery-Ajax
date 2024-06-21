@@ -12,12 +12,14 @@
                 </div>
                 <form id="add_order_form" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <p><strong>Name:</strong> <span id="modalName"></span></p>
-                        <p><strong>Drink:</strong> <span id="modalDrink"></span></p>
+                        <p><strong>Name:</strong> <span id="modalName"></span><input class='edit name' /></p>
+                        <p><strong>Drink:</strong> <span id="modalDrink"></span><input class='edit drink' /></p>
+                        <p><strong>Order Number:</strong> <span id="modalId"></span></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success update" data-bs-dismiss="modal">Update</button>
+                        <button type="button" class="btn btn-success update">Update</button>
+                        <button type="button" class="btn btn-primary save-changes" data-bs-dismiss="modal">Save Changes</button>
                         <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Update</button> -->
                     </div>
                 </form>
