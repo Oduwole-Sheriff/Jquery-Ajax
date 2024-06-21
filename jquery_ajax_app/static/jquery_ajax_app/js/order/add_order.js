@@ -1,7 +1,18 @@
+import {getAllOrders} from '../main.js'
+
+
+
 $(document).ready(function(){
+
+    function fetchOrderFromBackend(){
+        getAllOrders();
+    }
+    
+    
     $('#addOrderBtn').click(function(){
         $('#addOrderModal').modal('show');
     });
+
 
     $('#add_order_form').submit(function(e){
         e.preventDefault();
@@ -17,6 +28,7 @@ $(document).ready(function(){
                 // Show preloader if needed
             },
             success: function(data) {
+<<<<<<< HEAD:jquery_ajax_app/static/jquery_ajax_app/js/order/add.order.js
                 $('#add_order_form').trigger('reset'); // Reset the form
 
                 // Close the modal
@@ -29,6 +41,18 @@ $(document).ready(function(){
 
                 // Reload the page
                 location.reload();
+=======
+                // Handle success 
+
+                $('#addOrderModal').modal('hide'); // close the modal
+
+                $('#add_order_form').trigger('reset'); // Reset the form
+                
+                alert('Order added successfully!');
+
+                // add code to populate the orderlist
+                fetchOrderFromBackend();
+>>>>>>> 633aa967a7a8feeafea9b4a0e54d897ad2af0564:jquery_ajax_app/static/jquery_ajax_app/js/order/add_order.js
 
             },
             error: function(xhr, status, error) {

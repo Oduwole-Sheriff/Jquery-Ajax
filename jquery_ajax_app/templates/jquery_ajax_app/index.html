@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
 
-{% include 'jquery_ajax_app/order_modals.html' %}
-{% include 'jquery_ajax_app/update_modals.html' %}
-{% include 'jquery_ajax_app/view_modals.html' %}
+{% include 'jquery_ajax_app/modals/addOrder_modal.html' %}
+{% include 'jquery_ajax_app/modals/updateOrder_modal.html' %}
+{% include 'jquery_ajax_app/modals/viewOrder_modal.html' %}
 
     <div class="main-background">
         <div class="search-nav">
@@ -71,7 +71,7 @@
     </div>
 
     
-    <script src="{% static 'jquery_ajax_app/js/order/add.order.js' %}"></script>
+    <script type="module" src="{% static 'jquery_ajax_app/js/order/add_order.js' %}"></script>
     <script src="{% static 'jquery_ajax_app/js/order/update_order.js' %}"></script>
     <script src="{% static 'jquery_ajax_app/js/order/delete_order.js' %}"></script>
 
