@@ -22,6 +22,9 @@ $(document).ready(function () {
         
         // Open modal and set initial values
         openModal(postName, postDrink, postId);
+
+        $('.save-changes').hide();
+
     });
     
     // Function to update input fields with modal values and show them
@@ -37,6 +40,10 @@ $(document).ready(function () {
         
         // Hide modalName and modalDrink spans
         $('#modalName, #modalDrink').hide();
+
+        $('.save-changes').show();
+
+        $('.update').hide();
     });
     
     // Function to save changes back to modal values and post
