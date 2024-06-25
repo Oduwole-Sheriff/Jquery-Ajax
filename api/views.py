@@ -4,7 +4,9 @@ from django.http import JsonResponse
 from rest_framework.exceptions import ValidationError
 
 from jquery_ajax_app.models import Post
+from DependentDropDownList.models import Person
 from api.serializer import PostSerializer
+from api.serializer import PersonSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -50,3 +52,48 @@ class PostView(APIView):
         objs = Post.objects.get(id = data['id'])
         objs.delete()
         return Response({'message' : 'post deleted'})
+
+class PersonView(APIView):
+    def get(self, request):
+        objs = Person.objects.all()
+        serializer = PersonSerializer(objs, many = True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        data = request.data
+        serializer = PersonSerializer(data = data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return JsonResponse({'errors': serializer.errors}, status=400)
+    
+    def put(self, request):
+        data = request.data
+        try:
+            person = Person.objects.get(id=data['id'])
+        except Person.DoesNotExist:
+            return Response({'error': 'Person not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = PersonSerializer(person, data=data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request):
+        data = request.data
+        objs = Person.objects.get(id = data['id'])
+        serializer = PersonSerializer(objs, data = data, partial= True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+        # return Response({'message': "this is a Patch request"})
+
+    def delete(self, request):
+        data = request.data
+        objs = Person.objects.get(id = data['id'])
+        objs.delete()
+        return Response({'message' : 'post deleted'})
+        

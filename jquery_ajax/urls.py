@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("jquery_ajax_app.urls")),
     path('api/', include("api.urls")),
+    path('Persons/', include("DependentDropDownList.urls")),
 ]
 
 if settings.DEBUG:

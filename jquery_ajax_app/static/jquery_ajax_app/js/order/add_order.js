@@ -17,37 +17,46 @@ $(document).ready(function(){
     $('#add_order_form').submit(function(e){
         e.preventDefault();
         var formData = new FormData(this);
-
-        $.ajax({
-            type: 'POST',
-            url: '/api/post/',
-            data: formData,
-            contentType: false,
-            processData: false,
-            beforeSend: function() {
-                // Show preloader if needed
-            },
-            success: function(data) {
-
-                $('#add_order_form').trigger('reset'); // Reset the form
-
-                // Close the modal
-                $('#addOrderModal').modal('hide');
-                
-                alert('Order added successfully!');
-
-                // Add code to populate the order list immediately
-                addNewPost(data); // Assuming this function adds a new post
-
-                // Reload the page
-                location.reload();
-
-            },
-            error: function(xhr, status, error) {
-                alert('A post with that name already exist');
+    
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Order Has Been Added Successfully?',
+            confirmButtonText: 'Okay',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/post/',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        // Show preloader if needed
+                    },
+                    success: function(data) {
+                        $('#add_order_form').trigger('reset'); // Reset the form
+                        $('#addOrderModal').modal('hide');
+    
+                        // Add code to populate the order list immediately
+                        addNewPost(data); // Assuming this function adds a new post
+    
+                        // Reload the page
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'A post with that name already exists',
+                        });
+                    }
+                });
             }
         });
     });
+    
 
     // Function to add a new post dynamically
     function addNewPost(postData) {

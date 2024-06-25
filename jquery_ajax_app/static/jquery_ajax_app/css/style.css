@@ -58,6 +58,19 @@ nav h6{
 .nav-list h5{
     font-size: 14px;
     margin: auto;
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-list a{
+    font-size: 14px;
+    margin: auto;
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-list a:hover{
+    color: #fff;
 }
 
 /* main background */
@@ -277,6 +290,10 @@ nav h6{
 .send{
     padding: 10px 30px !important;
     margin-right: 5px;
+    margin-top: 30px;
+}
+
+#div_id_city{
     margin-top: 30px;
 }
 
