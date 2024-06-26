@@ -120,3 +120,15 @@ $(document).ready(function(){
         });
     });
 });
+
+let hamburger = document.querySelector(".hamburger");
+let toggleMenu = document.querySelector(".background");
+let toggleLogo = document.querySelector(".logo-display");
+let toggleNav = document.querySelector("nav");
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    toggleMenu.classList.toggle("active");
+    toggleLogo.classList.toggle("active");
+    toggleNav.classList.toggle("active");
+})
