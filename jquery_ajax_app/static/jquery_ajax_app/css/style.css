@@ -393,6 +393,16 @@ nav h6{
     color: #fff;
 }
 
+@media (max-width: 930px){
+    .create-task{
+        width: 90% !important;
+        margin-left: 10%;
+    }
+    .create-section{
+        width: 100% !important;
+    }
+}
+
 .create-section{
     width: 60%;
     height: 100%;
