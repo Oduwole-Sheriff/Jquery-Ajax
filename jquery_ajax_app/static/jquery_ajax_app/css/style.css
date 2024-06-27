@@ -169,6 +169,12 @@ nav h6{
     }
 }
 
+@media (max-width: 550px){
+    .main-background{
+        padding: 40px 20px; 
+    }
+}
+
 @media (max-width: 930px){
     .main-background{
         width: 90%;
@@ -213,6 +219,17 @@ nav h6{
     .search-box{
         width: 140px !important;
         margin-right: 20px;
+    }
+}
+
+@media (max-width: 550px){
+    .search-nav{
+        padding: 10px;
+    }
+    .search-box{
+        width: 100px !important;
+        margin-right: 15px;
+        padding: 5px;
     }
 }
 
@@ -267,6 +284,16 @@ nav h6{
     }
 }
 
+@media (max-width: 550px){
+    .online-links{
+        gap: 5px;
+    }
+    .online-links img{
+        width: 30px;
+        padding: 5px;
+    }
+}
+
 .profile{
     display: flex;
     align-items: center;
@@ -290,6 +317,22 @@ nav h6{
     border: 1px solid rgba(255, 255, 255, 0.425);
     border-radius: 50%;
     cursor: pointer;
+}
+
+@media (max-width: 550px){
+    .profile{
+        gap: 5px;
+    }
+    .profile p{
+        font-size: 12px;
+    }
+    .profile img{
+        width: 30px;
+        height: 30px;
+    }
+    .line{
+        height: 30px !important;
+    }
 }
 
 .line{
@@ -329,6 +372,20 @@ nav h6{
 
 .manage-task-btn a:hover{
     color: #fff;
+}
+
+@media (max-width: 550px){
+    .maange-task-text h3{
+        font-weight: 500;
+        font-size: 20px;
+    }
+    .maange-task-text p{
+        font-size: 10px;
+    }
+    .manage-task-btn a{
+        padding: 12px 15px;
+        font-size: 12px;
+    }
 }
 
 /* POSTS */
@@ -374,6 +431,31 @@ nav h6{
 
 .post-btn a:hover{
     color: rgb(207, 142, 1);
+}
+
+@media (max-width: 550px){
+    .post img{
+        width: 30px;
+        height: 30px;
+    }
+    
+    .post-text p{
+        font-size: 12px;
+    }
+    
+    .post-text a{
+        font-size: 16px;
+    }
+    
+    .post-btn a{
+        background: transparent;
+        color: rgb(207, 142, 1);
+        padding: 7px 15px;
+        border-radius: 30px;
+        border: 1px solid rgb(207, 142, 1);
+        font-weight: lighter;
+        text-decoration: none;
+    }
 }
 
 /* Create Task */
