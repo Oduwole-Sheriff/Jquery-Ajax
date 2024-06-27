@@ -16,11 +16,11 @@ body{
 
 @media (max-width: 930px) {
     body{
-        background: linear-gradient(to top, #15cf4c, #1ac954 40%, #1ac954 90%) !important;
+        background:  #964B00!important;
     }
     .background{
         width: 10%;
-        background: linear-gradient(to top, #15cf4c, #1ac954 40%, #1ac954 80%) !important;
+        background:  #964B00 !important;
         padding: 20px 0px;
     }
     .logo-display{
@@ -59,6 +59,16 @@ nav.active{
     margin-right: 10px; */
     margin: -10px 20px 0px 10px;
     cursor: pointer;
+}
+
+@media (max-width: 550px) {
+    .hamburger{
+        margin-right: -40px !important;
+        width: 15px;
+    }
+    .background{
+        width: 10%;
+    }
 }
 
 .bar{
@@ -171,7 +181,8 @@ nav h6{
 
 @media (max-width: 550px){
     .main-background{
-        padding: 40px 20px; 
+        padding: 40px 10px; 
+        height: 100% !important;
     }
 }
 
@@ -224,12 +235,12 @@ nav h6{
 
 @media (max-width: 550px){
     .search-nav{
-        padding: 10px;
+        padding: 5px 10px;
     }
     .search-box{
         width: 100px !important;
         margin-right: 15px;
-        padding: 5px;
+        padding: 3px;
     }
 }
 
@@ -482,6 +493,16 @@ nav h6{
     }
     .create-section{
         width: 100% !important;
+    }
+}
+
+@media (max-width: 660px){
+    .create-task{
+        padding: 40px 10px;
+    }
+    .send{
+        display: block;
+        width: 100%;
     }
 }
 
