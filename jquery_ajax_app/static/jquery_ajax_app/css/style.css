@@ -16,11 +16,11 @@ body{
 
 @media (max-width: 930px) {
     body{
-        background:  #964B00!important;
+        background:  #000 !important;
     }
     .background{
         width: 10%;
-        background:  #964B00 !important;
+        background:  #000 !important;
         padding: 20px 0px;
     }
     .logo-display{
@@ -32,6 +32,9 @@ body{
     .hamburger{
         display: block !important;
         margin-right: 25px !important;
+    }
+    .hide{
+        display: none;
     }
 }
 
