@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from jquery_ajax_app.models import Post
 from DependentDropDownList.models import City, Person
+from Language.models import Language, Entry
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
@@ -43,3 +44,8 @@ class PersonSerializer(serializers.ModelSerializer):
     #             pass  # invalid input from the client; ignore and fallback to empty City queryset
     #     elif self.instance.pk:
     #         self.fields['city'].queryset = self.instance.country.city_set.order_by('name')
+
+class LanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Entry
+        fields = '__all__'

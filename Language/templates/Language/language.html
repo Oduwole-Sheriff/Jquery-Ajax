@@ -1,0 +1,67 @@
+{% extends 'jquery_ajax_app/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div class="create-task">
+    <div class="create-section">
+        <h1>Add an Entry</h1><br>
+        <form method="post" action="{% url 'language' %}" id="entryForm">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="from-group">
+                <input class="btn btn-outline-info send" type="submit" value="Submit">
+                <a href="{% url 'home' %}" class="btn btn-outline-success send">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#id_language').select2({
+            ajax: {
+                url: '{% url "language" %}',
+                dataType: 'json',
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {id: item.id, text: item.title};
+                        })
+                    };
+                }
+            },
+            minimumInputLength: 1
+        });
+
+        $('#entryForm').submit(function(e){
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+                type: "POST",
+                url: "/api/language/",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(data){
+
+                    $('#entryForm').trigger('reset');
+
+                    Swal.fire({
+                        title: "Your Data Has Been Received!",
+                        icon: "success",
+                    });
+                }
+            })
+        })
+    });
+
+</script>
+
+
+{% endblock content%}
