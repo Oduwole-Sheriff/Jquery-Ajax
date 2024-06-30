@@ -12,6 +12,7 @@ body{
     margin: 0px !important;
     position: fixed;
     transition: 0.5s ease-in-out;
+    z-index: 500;
 }
 
 @media (max-width: 930px) {
