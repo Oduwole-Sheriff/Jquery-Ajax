@@ -2,6 +2,35 @@ from rest_framework import serializers
 from jquery_ajax_app.models import Post
 from DependentDropDownList.models import City, Person
 from Language.models import Language, Entry
+from authentication.models import Profile
+
+from django.contrib.auth.models import User
+
+class RegisterSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        if data['username']:
+            if User.objects.filter(username = data['username']).exists():
+                raise serializers.ValidationError('username is taken')
+
+        if data['email']:
+            if User.objects.filter(username = data['email']).exists():
+                raise serializers.ValidationError('email is taken')
+
+        return data
+    def create(self, validated_data):
+        user = User.objects.create(username = validated_data['username'], email = validated_data['email'])
+        user.set_password(validated_data['password'])
+        user.save()
+        return validated_data
+        print(validated_data)
+
+class LoginSerializer(serializers.Serializer):
+        username = serializers.CharField()
+        password = serializers.CharField()
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,4 +77,9 @@ class PersonSerializer(serializers.ModelSerializer):
 class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Entry
+        fields = '__all__'
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
         fields = '__all__'

@@ -18,10 +18,27 @@ function addOrder(order){
 } 
 
 
+export function getAuthToken() {
+    return localStorage.getItem('token');
+}
+
+
 export function getAllOrders(){
+
+    const token = getAuthToken();
+
+    // Check if token is null or empty
+    if (!token) {
+        console.log('Token not available');
+        return; // or handle appropriately
+    }
+
     $.ajax({
         type: 'GET',
         url: '/api/post/',
+        headers: {
+            'Authorization': `Token ${getAuthToken()}` // Assuming Bearer token authentication
+        },
         success: function(orders){
             $.each(orders, function(i, order){
                 addOrder(order);
@@ -33,6 +50,8 @@ export function getAllOrders(){
     });
 }
 
+// console.log('Token:', getAuthToken());
+// getAllOrders();
 
 
 

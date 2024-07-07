@@ -1,7 +1,6 @@
 import {getAllOrders} from '../main.js'
 
 
-
 $(document).ready(function(){
 
     function fetchOrderFromBackend(){
@@ -13,10 +12,16 @@ $(document).ready(function(){
         $('#addOrderModal').modal('show');
     });
 
+    function getAuthToken() {
+        return localStorage.getItem('token');
+    }
 
     $('#add_order_form').submit(function(e){
         e.preventDefault();
         var formData = new FormData(this);
+
+        const token = getAuthToken();
+        console.log('Token:', token);
     
         Swal.fire({
             icon: 'success',
@@ -30,6 +35,9 @@ $(document).ready(function(){
                     type: 'POST',
                     url: '/api/post/',
                     data: formData,
+                    headers: {
+                        'Authorization': `Token ${getAuthToken()}` // Assuming Bearer token authentication
+                    },
                     contentType: false,
                     processData: false,
                     beforeSend: function() {
@@ -56,8 +64,8 @@ $(document).ready(function(){
             }
         });
     });
-    
 
+    
     // Function to add a new post dynamically
     function addNewPost(postData) {
         // Example: Assuming posts are rendered in a certain format

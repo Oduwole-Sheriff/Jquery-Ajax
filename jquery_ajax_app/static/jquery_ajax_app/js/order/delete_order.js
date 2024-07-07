@@ -1,39 +1,21 @@
-// $(document).ready(function(){
-
-//     var $search_nav = $('.search-nav')
-
-//     $search_nav.on('click', '.remove', function(){
-//         var dataId = $(this).attr('data-id');
-//         var $search_nav = $(this).closest('.search-nav');
-
-//         const confirmDelete = confirm('Are you sure you want to delete this item?')
-
-//         if(confirmDelete === true){
-//             $.ajax({
-//                 type: 'DELETE',
-//                 url: '/api/post/',
-//                 data: { id: dataId },
-//                 success: function(){
-//                     $search_nav.fadeOut(300, function(){
-//                         $(this).remove();
-//                         console.log('Data deleted successfully');
-//                     });
-//                 },
-//                 error: function() {
-//                     console.error('Error deleting data');
-//                 },
-//             });
-//         }
-//     })
-
-// });
-
 $(document).ready(function(){
     var $search_nav = $('.search-nav');
+    
+    function getAuthToken() {
+        return localStorage.getItem('token');
+    }
 
     $search_nav.on('click', '.remove', function(e){
         e.preventDefault();
-        
+
+        const token = getAuthToken();
+
+        // Check if token is null or empty
+        if (!token) {
+            console.log('Token not available');
+            return; // or handle appropriately
+        }
+            
         var dataId = $(this).attr('data-id');
         var $searchNavToRemove = $(this).closest('.search-nav');
     
@@ -51,6 +33,9 @@ $(document).ready(function(){
                     type: 'DELETE',
                     url: '/api/post/',
                     data: { id: dataId },
+                    headers: {
+                        'Authorization': `Token ${getAuthToken()}` // Assuming Bearer token authentication
+                    },
                     success: function(){
                         $searchNavToRemove.fadeOut(300, function(){
                             $(this).remove();
@@ -68,5 +53,7 @@ $(document).ready(function(){
             }
         });
     });
+
     
 });
+

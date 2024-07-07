@@ -4,8 +4,11 @@ from .models import Post
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
+
 # Create your views here.
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Post
     template_name = 'jquery_ajax_app/index.html'
     context_object_name = 'posts'
@@ -15,7 +18,11 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         context['post_form'] = PostForm()
         return context
-    
+        
+    def test_func(self):
+        # Example: Allow access only to logged-in users
+        return self.request.user.is_authenticated
+
 
 class PostDetailView(DetailView):
     model = Post

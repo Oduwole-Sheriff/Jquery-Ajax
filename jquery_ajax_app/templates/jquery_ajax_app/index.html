@@ -19,11 +19,11 @@
                 <span class="line"></span>
                 <div class="profile">
                     <div>
-                        <p>SHGZ</p>
-                        <p> <strong>Vadoo</strong> </p>
+                        <p>{{ user.username }}</p>
+                        <p> <strong>Account</strong> </p>
                     </div>
                     
-                    <img src="{% static 'jquery_ajax_app/img/default.jpg' %}" alt="profile">
+                    <img src="{{ user.profile.image.url }}" alt="profile">
                 </div>
             </div>
 

@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from .forms import EntryCreationForm
 from django.http import JsonResponse
 from .models import Entry, Language
+
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required
 def language(request):
     form = EntryCreationForm(instance=Entry.objects.first())
 

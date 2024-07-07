@@ -45,6 +45,10 @@ $(document).ready(function () {
 
         $('.update').hide();
     });
+
+    function getAuthToken() {
+        return localStorage.getItem('token');
+    }
     
     // Function to save changes back to modal values and post
     $('.save-changes').on('click', function () {
@@ -59,6 +63,9 @@ $(document).ready(function () {
         // Update post in the only-post section
         var postToUpdate = $('.search-nav[data-id="' + postId + '"]');
         postToUpdate.find('.post-text h4 a').text(newNameValue + ' - ' + newDrinkValue);
+
+        const token = getAuthToken();
+        console.log('Token:', token);
         
         // Send AJAX request to update the post on the server
         $.ajax({
@@ -69,6 +76,9 @@ $(document).ready(function () {
                 drink: newDrinkValue,
                 id: postId,
                 csrfmiddlewaretoken: '{{ csrf_token }}'  // Ensure CSRF token is included
+            },
+            headers: {
+                'Authorization': `Token ${getAuthToken()}` // Assuming Bearer token authentication
             },
             dataType: 'json',
             success: function (data) {

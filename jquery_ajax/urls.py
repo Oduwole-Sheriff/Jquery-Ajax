@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/', include("api.urls")),
     path('Persons/', include("DependentDropDownList.urls")),
     path('Language/', include("Language.urls")),
+    path('authentication/', include("authentication.urls")),
 ]
 
 if settings.DEBUG:

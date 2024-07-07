@@ -5,7 +5,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PersonCreationForm
 from .models import Person, City
 
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def person_create_view(request):
     form = PersonCreationForm()
     if request.method == 'POST':

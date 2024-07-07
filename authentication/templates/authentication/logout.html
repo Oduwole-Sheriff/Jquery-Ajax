@@ -1,0 +1,22 @@
+{% extends 'authentication/register-base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="create-task-register logout">
+        <div class="create-section register">
+            <h2 class="text-white">You have been logged out</h2>
+            <div class="pt-3">
+                <small class="btn btn-outline-info btn-lg logout-btn">
+                <a href="{% url 'login' %}" class="text-white">Log In Again</a>
+                </small>
+                <div class="video-background">
+                    <video autoplay muted loop>
+                        <source src="{% static 'authentication/videos/background-video.webm' %}" type="video/webm">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock content %}
