@@ -5,17 +5,17 @@
 
     <div class="create-task-register">
         <div class="create-section register">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form id="register-form" action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">REGISTER</legend>
                     {{ form.username|as_crispy_field }}
                     {{ form.email|as_crispy_field }}
-                    {{ form.password|as_crispy_field }}<br>  <!-- Update field name to password -->
+                    {{ form.password|as_crispy_field }}<br>
                     {{ form.password2|as_crispy_field }}
                 </fieldset>
-                <div class="from-group">
-                    <button class="btn btn-outline-info mb-3" type="submit">Sign Up</button>
+                <div class="form-group">
+                    <button id="SignUp" class="btn btn-outline-info mb-3" type="button">Sign Up</button>
                 </div>
             </form>
             <div class="border-top pt-3">
@@ -34,37 +34,34 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.create-task-register form').submit(function(event) {
+
+            $('#SignUp').click(function(event) {
                 event.preventDefault();
 
-                var formData = $(this).serialize();
+                const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+                // Serialize the form data
+                var formData = $('#register-form').serialize();
 
                 $.ajax({
                     type: 'POST',
                     url: '/api/register/', 
                     data: formData,
-                    beforeSend: function() {
-                        
+                    headers: {
+                    'X-CSRFToken': csrfToken
                     },
                     success: function(response) {
-                        
-                        if (response.success) {
-                            alert('Account created. You can now login.');
-                            window.location.href = "{% url 'login' %}";
-                        } else {
-                            alert('Registration failed. Please check your credentials.');
-                        }
-                        
+                        alert('Account created. You can now login.');
+                
+                        window.location.href = "{% url 'login' %}";
                     },
                     error: function(xhr, status, error) {
                         alert('Registration failed. Please try again.'); // Replace with your logic
-                    },
-                    complete: function() {
-
                     }
                 });
             });
         });
+
     </script>
 
 {% endblock content %}

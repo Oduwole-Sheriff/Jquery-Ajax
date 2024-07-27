@@ -18,26 +18,26 @@ function addOrder(order){
 } 
 
 
-export function getAuthToken() {
-    return localStorage.getItem('token');
+function getAuthToken() {
+    return localStorage.getItem('token') || '';
 }
 
 
 export function getAllOrders(){
 
-    const token = getAuthToken();
+    const token = '09ea37144ec28f34ca6edb381d271f7dcdd583e3'.trim();
 
-    // Check if token is null or empty
     if (!token) {
         console.log('Token not available');
-        return; // or handle appropriately
+        return;  // Prevent making the request if no token
     }
+    console.log(`Token: ${token}`);
 
     $.ajax({
         type: 'GET',
         url: '/api/post/',
         headers: {
-            'Authorization': `Token ${getAuthToken()}` // Assuming Bearer token authentication
+            'Authorization': `Token ${token.trim()}`
         },
         success: function(orders){
             $.each(orders, function(i, order){
@@ -45,7 +45,7 @@ export function getAllOrders(){
             });
         },
         error: function(xhr, status, error) {
-            alert('Error loading orders');
+            console.error(`Error loading orders: ${status} - ${error}`);
         }
     });
 }
@@ -55,7 +55,6 @@ export function getAllOrders(){
 
 
 
-$(document).ready(function(){
     var $orders = $('#orders');
     var $name = $('#name');
     var $drink = $('#drink');
@@ -138,16 +137,28 @@ $(document).ready(function(){
             }
         });
     });
+
+document.addEventListener("DOMContentLoaded", () => {
+    let hamburger = document.querySelector(".hamburger");
+    let toggleMenu = document.querySelector(".background");
+    let toggleLogo = document.querySelector(".logo-display");
+    let toggleNav = document.querySelector("nav");
+    
+    if (hamburger) {
+        hamburger.addEventListener("click", () => {
+            // Your event handler code
+            hamburger.classList.toggle("active");
+            toggleMenu.classList.toggle("active");
+            toggleLogo.classList.toggle("active");
+            toggleNav.classList.toggle("active");
+        });
+    } else {
+        console.error("Element with class 'hamburger' not found");
+    }
 });
 
-let hamburger = document.querySelector(".hamburger");
-let toggleMenu = document.querySelector(".background");
-let toggleLogo = document.querySelector(".logo-display");
-let toggleNav = document.querySelector("nav");
+// let hamburger = document.querySelector(".hamburger");
 
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    toggleMenu.classList.toggle("active");
-    toggleLogo.classList.toggle("active");
-    toggleNav.classList.toggle("active");
-})
+// hamburger.addEventListener("click", () => {
+    
+// })

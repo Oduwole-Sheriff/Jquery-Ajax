@@ -5,7 +5,7 @@
 
     <div class="create-task-register">
         <div class="create-section register">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form id="login-form" action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">LOGIN</legend>
@@ -28,9 +28,9 @@
                         {% endif %}
                     </div>
                 </fieldset>
-                <div class="from-group">
-                    <div class="from-group">
-                        <button class="btn btn-outline-info mb-3 mt-3" type="submit">Login</button>
+                <div class="form-group">
+                    <div class="form-group">
+                        <button class="btn btn-outline-info mb-3 mt-3 loginForm" type="submit">Login</button>
                     </div>
                     <small class="text-white ml-2">
                         <a href="{% url 'password_reset' %}" class="text-white">Forgotten Password?</a>
@@ -55,33 +55,33 @@
 <script>
 
     $(document).ready(function() {
-        $('#loginForm').submit(function(event) {
+
+        $('.loginForm').submit(function(event) {
             event.preventDefault();
 
-            var formData = $(this).serialize();
+            const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+            var formData = $('#login-form').serialize();
 
             $.ajax({
                 type: 'POST',
                 url: '/api/login/',
                 data: formData,
-                beforeSend: function() {
-                    $('#loginBtn').prop('disabled', true);
+                headers: {
+                    'X-CSRFToken': csrfToken
                 },
                 success: function(response) {
+                    alert('Your account has been logged in successfully')
+            
                     window.location.href = "{% url 'home' %}";
                 },
                 error: function(xhr, status, error) {
-                    alert('Login failed. Please check your credentials and try again.');
-                },
-                complete: function() {
-                    $('#loginBtn').prop('disabled', false);
+                    alert('Login failed. Please check your credentials and try again.'); // Show error message
                 }
             });
         });
-        
-
     });
+    
 </script>
-<script src="{% static 'authentication/js/auth.js' %}"></script>
 
 {% endblock content %}

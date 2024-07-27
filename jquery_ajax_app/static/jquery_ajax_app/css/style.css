@@ -128,7 +128,7 @@ nav h6{
 
 .nav-list{
     border: 1px solid rgba(255, 255, 255, 0.425);
-    padding: 10px 15px;
+    padding: 6px 15px;
     border-radius: 50px;
     margin: 12px 0;
     cursor: pointer;
@@ -140,12 +140,13 @@ nav h6{
     color: rgb(37, 0, 37);
 }
 
-.nav-list h5{
-    font-size: 14px;
+/* .nav-list h5{
+    font-size: 13px;
     margin: auto;
     text-decoration: none;
     color: #fff;
-}
+    font-weight: 400;
+} */
 
 .nav-list a{
     font-size: 14px;
@@ -156,6 +157,15 @@ nav h6{
 
 .nav-list a:hover{
     color: #fff;
+}
+
+.nav-list button{
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
 }
 
 /* main background */
@@ -605,12 +615,11 @@ nav h6{
 }
 
 .logout-btn{
-    padding: 0 !important;
+    width: 100%;
 }
 
 .logout-btn a{
     text-decoration: none !important;
-    padding: 10px 50px;
 }
 
 .create-task-register.logout{

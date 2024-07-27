@@ -20,7 +20,8 @@ $(document).ready(function(){
         e.preventDefault();
         var formData = new FormData(this);
 
-        const token = getAuthToken();
+        // const token = getAuthToken();
+        const token = '09ea37144ec28f34ca6edb381d271f7dcdd583e3'.trim();
         console.log('Token:', token);
     
         Swal.fire({
@@ -36,7 +37,8 @@ $(document).ready(function(){
                     url: '/api/post/',
                     data: formData,
                     headers: {
-                        'Authorization': `Token ${getAuthToken()}` // Assuming Bearer token authentication
+                        'Authorization': `Token ${token.trim()}`
+                        // 'Authorization': `Token ${getAuthToken()}` // Assuming Bearer token authentication
                     },
                     contentType: false,
                     processData: false,
