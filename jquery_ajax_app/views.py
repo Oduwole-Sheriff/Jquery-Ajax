@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 
 # Create your views here.
-class PostListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'jquery_ajax_app/index.html'
     context_object_name = 'posts'

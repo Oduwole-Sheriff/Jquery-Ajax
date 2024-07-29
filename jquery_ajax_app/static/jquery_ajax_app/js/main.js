@@ -19,13 +19,12 @@ function addOrder(order){
 
 
 function getAuthToken() {
-    return localStorage.getItem('token') || '';
+    return localStorage.getItem('token');
 }
-
 
 export function getAllOrders(){
 
-    const token = '09ea37144ec28f34ca6edb381d271f7dcdd583e3'.trim();
+    const token = getAuthToken();
 
     if (!token) {
         console.log('Token not available');
@@ -37,7 +36,7 @@ export function getAllOrders(){
         type: 'GET',
         url: '/api/post/',
         headers: {
-            'Authorization': `Token ${token.trim()}`
+            'Authorization': `Token ${getAuthToken()}`
         },
         success: function(orders){
             $.each(orders, function(i, order){

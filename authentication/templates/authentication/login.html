@@ -56,8 +56,8 @@
 
     $(document).ready(function() {
 
-        $('.loginForm').submit(function(event) {
-            event.preventDefault();
+        $('.loginForm').on('click', function(event) {
+            // event.preventDefault();
 
             const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
@@ -70,10 +70,19 @@
                 headers: {
                     'X-CSRFToken': csrfToken
                 },
-                success: function(response) {
-                    alert('Your account has been logged in successfully')
-            
-                    window.location.href = "{% url 'home' %}";
+                success: function(response) { 
+                     // Extract the token from the response
+                    const tokenString = response.token;
+                    // Extract the actual token value using a regular expression
+                    const tokenMatch = tokenString.match(/<Token: ([^>]+)>/);
+                    if (tokenMatch) {
+                        const token = tokenMatch[1];
+                        alert('Your account has been logged in successfully');
+                        localStorage.setItem('token', token);
+                        window.location.href = "{% url 'home' %}";
+                    } else {
+                        alert('Unexpected token format.');
+                    } 
                 },
                 error: function(xhr, status, error) {
                     alert('Login failed. Please check your credentials and try again.'); // Show error message

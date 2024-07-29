@@ -64,8 +64,7 @@ $(document).ready(function () {
         var postToUpdate = $('.search-nav[data-id="' + postId + '"]');
         postToUpdate.find('.post-text h4 a').text(newNameValue + ' - ' + newDrinkValue);
 
-        // const token = getAuthToken();
-        const token = '09ea37144ec28f34ca6edb381d271f7dcdd583e3'.trim();
+        token = getAuthToken();
         console.log('Token:', token);
         
         // Send AJAX request to update the post on the server
@@ -79,8 +78,7 @@ $(document).ready(function () {
                 csrfmiddlewaretoken: '{{ csrf_token }}'  // Ensure CSRF token is included
             },
             headers: {
-                'Authorization': `Token ${token.trim()}`
-                // 'Authorization': `Token ${getAuthToken()}` // Assuming Bearer token authentication
+                'Authorization': `Token ${getAuthToken()}` // Assuming Bearer token authentication
             },
             dataType: 'json',
             success: function (data) {
