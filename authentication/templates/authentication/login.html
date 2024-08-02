@@ -30,7 +30,7 @@
                 </fieldset>
                 <div class="form-group">
                     <div class="form-group">
-                        <button class="btn btn-outline-info mb-3 mt-3 loginForm" type="submit">Login</button>
+                        <button class="btn btn-outline-info mb-3 mt-3" type="submit">Login</button>
                     </div>
                     <small class="text-white ml-2">
                         <a href="{% url 'password_reset' %}" class="text-white">Forgotten Password?</a>
@@ -46,7 +46,7 @@
     
         <div class="video-background">
             <video autoplay muted loop>
-                <source src="{% static 'authentication/videos/background-video.webm' %}" type="video/webm">
+                <source src="{% static 'authentication/videos/background-video01.webm' %}" type="video/webm">
             </video>
         </div>
     </div>
@@ -56,8 +56,8 @@
 
     $(document).ready(function() {
 
-        $('.loginForm').on('click', function(event) {
-            // event.preventDefault();
+        $('#login-form').on('submit', function(event) {
+            event.preventDefault();
 
             const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
 
@@ -71,18 +71,19 @@
                     'X-CSRFToken': csrfToken
                 },
                 success: function(response) { 
-                     // Extract the token from the response
-                    const tokenString = response.token;
-                    // Extract the actual token value using a regular expression
-                    const tokenMatch = tokenString.match(/<Token: ([^>]+)>/);
-                    if (tokenMatch) {
-                        const token = tokenMatch[1];
+                    console.log(response); // Log the entire response object for debugging
+
+                    const token = response.token;
+                    if (token) {
                         alert('Your account has been logged in successfully');
                         localStorage.setItem('token', token);
-                        window.location.href = "{% url 'home' %}";
+
+                        // Redirection to the home page
+                        window.location.href = response.redirect_url;
+                        console.log(response.redirect_url)
                     } else {
-                        alert('Unexpected token format.');
-                    } 
+                        alert('Token not received in response.');
+                    }
                 },
                 error: function(xhr, status, error) {
                     alert('Login failed. Please check your credentials and try again.'); // Show error message

@@ -22,6 +22,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 
+from django.contrib.auth import authenticate, login
 
 class LoginAPI(APIView):
     def post(self, request):
@@ -40,9 +41,15 @@ class LoginAPI(APIView):
                 'message': "invalid credentials"
             }, status.HTTP_400_BAD_REQUEST)
 
-        token = Token.objects.get_or_create(user=user)
+        token, created = Token.objects.get_or_create(user=user)
         print(token)
-        return Response({'status': True, 'message': 'user login', 'token': str(token) }, status.HTTP_201_CREATED)
+        if user:
+            login(request, user)
+            return Response({'status': True, 'message': 'User logged in', 'token': token.key, 'redirect_url': '/'}, status=status.HTTP_200_OK)
+
+        # token = Token.objects.get_or_create(user=user)
+        # print(token)
+        # return Response({'status': True, 'message': 'user login', 'token': str(token) }, status.HTTP_201_CREATED)
 
 
 class ResgisterAPI(APIView):

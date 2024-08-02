@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from jquery_ajax_app.forms import PostForm
 from .models import Post
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
