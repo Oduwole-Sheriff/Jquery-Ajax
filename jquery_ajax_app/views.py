@@ -24,6 +24,8 @@ class PostListView(LoginRequiredMixin, ListView):
         # Example: Allow access only to logged-in users
         return self.request.user.is_authenticated
 
+def hijack_user(request):
+    return render(request, 'jquery_ajax_app/hijack_user.html')
 
 class PostDetailView(DetailView):
     model = Post

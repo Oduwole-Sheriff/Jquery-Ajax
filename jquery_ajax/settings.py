@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "unfold",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,6 +52,9 @@ INSTALLED_APPS = [
     "DependentDropDownList",
     "Language",
     "authentication",
+    'hijack',
+    'hijack.contrib.admin',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'hijack.middleware.HijackUserMiddleware',
 ]
 
 ROOT_URLCONF = 'jquery_ajax.urls'
@@ -154,7 +159,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'hijack-user'
 LOGIN_URL = 'login'
 
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')

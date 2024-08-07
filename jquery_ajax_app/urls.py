@@ -8,4 +8,5 @@ urlpatterns = [
     path('order/<int:pk>/', PostDetailView.as_view(), name='order-detail'),
     path('order/new/', PostCreateView.as_view(), name='new-order'),
     path('order/<int:pk>/update/', PostUpdateView.as_view(), name='update-order'),
+    path('hijack-user', views.hijack_user, name='hijack-user'),
 ]
