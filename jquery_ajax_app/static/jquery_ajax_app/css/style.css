@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 body{
     position: relative;
     background: #09041f !important;
+    font-family: 'Muli', sans-serif !important;
 }
 
 .background{
@@ -545,26 +547,15 @@ nav h6{
 
 /* AUTHENTICATION */
 
-.video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Place the video behind other content */
-    overflow: hidden;
-  }
-  .video-background video {
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .content {
+.create-task-register{
+    background: url('https://images.unsplash.com/photo-1712397943847-e104395a1a8b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGRhcmslMjBibHVlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
     position: relative;
     z-index: 1; /* Ensure content appears above the video */
     text-align: center;
@@ -573,15 +564,15 @@ nav h6{
   }
 
 .create-section.register{
-    background: rgba(91, 91, 121, 0.678);
-    border: 1px solid rgb(255, 255, 255);
-    width: 40%;
-    margin: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px 40px;
+    border-radius: 5px;
     color: #fff;
-    margin-top: 50px;
+    width: 30% !important;
+    height: 70% !important;
 }
 
-@media (max-width: 930px){
+@media (max-width: 1200px){
     .create-section.register{
         width: 50% !important;
     }
@@ -603,7 +594,7 @@ nav h6{
 #div_id_email,
 #div_id_password1,
 #div_id_password2{
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 #id_username,
@@ -611,7 +602,35 @@ nav h6{
 #id_password1,
 #id_password2,
 #id_password{
-    background: rgba(255, 255, 255, 0.822);
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    display: block;
+    padding: 5px 0;
+    width: 100%;
+    font-size: 18px;
+    color: #fff;
+}
+
+#id_username:focus,
+#id_email:focus,
+#id_password1:focus,
+#id_password2:focus,
+#id_password:focus{
+    border: none;
+    outline: #fff !important;
+}
+
+.sign-up{
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    background-color: lightblue;
+    padding: 15px;
+    font-family: inherit;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
 }
 
 .logout-btn{
@@ -620,10 +639,6 @@ nav h6{
 
 .logout-btn a{
     text-decoration: none !important;
-}
-
-.create-task-register.logout{
-    margin-top: 200px !important;
 }
 
 .sign-in-here{

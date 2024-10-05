@@ -8,6 +8,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 
+from django.http import HttpResponse
+
 # Create your views here.
 class PostListView(LoginRequiredMixin, ListView):
     model = Post
@@ -24,8 +26,17 @@ class PostListView(LoginRequiredMixin, ListView):
         # Example: Allow access only to logged-in users
         return self.request.user.is_authenticated
 
+
 def hijack_user(request):
     return render(request, 'jquery_ajax_app/hijack_user.html')
+
+
+def fake_login(request):
+    return HttpResponse("The System Does Not Identify You As Part Of Our Admin And Access Has Been Blocked For This Page.")
+
+
+
+
 
 class PostDetailView(DetailView):
     model = Post

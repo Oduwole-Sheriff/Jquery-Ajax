@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'hijack',
     'hijack.contrib.admin',
     'drf_yasg',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -62,11 +63,24 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'axes.middleware.AxesMiddleware',
+    'jquery_ajax_app.middleware.FakeLoginMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'hijack.middleware.HijackUserMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',  # Ensure this is included
+    'django.contrib.auth.backends.ModelBackend',  # Default backend
+]
+
+AXES_FAILURE_LIMIT = 3  # Example setting
+AXES_COOLOFF_TIME = 1  # Example setting
+AXES_LOCK_OUT_AT_FAILURE = True  # Example setting
+
 
 ROOT_URLCONF = 'jquery_ajax.urls'
 

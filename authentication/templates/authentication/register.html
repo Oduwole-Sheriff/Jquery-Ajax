@@ -8,31 +8,27 @@
             <form id="register-form" action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">REGISTER</legend>
+                    <legend class="mb-4 text-center">REGISTER</legend>
                     {{ form.username|as_crispy_field }}
                     {{ form.email|as_crispy_field }}
                     {{ form.password|as_crispy_field }}<br>
                     {{ form.password2|as_crispy_field }}
                 </fieldset>
                 <div class="form-group">
-                    <button class="btn btn-outline-info mb-3" type="submit">Sign Up</button>
+                    <button class="sign-up" type="submit">Sign Up</button>
                 </div>
             </form>
-            <div class="border-top pt-3">
+            <div class="pt-3">
                 <small class="text-white">
                     Already Have An Account? <a class="ml-2 text-white" href="{% url 'login' %}">Sign In</a>
                 </small>
             </div>
         </div>
-        <div class="video-background">
-            <video autoplay muted loop>
-                <source src="{% static 'authentication/videos/background-video01.webm' %}" type="video/webm">
-            </video>
-        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+ 
         $(document).ready(function() {
 
             $('#register-form').on('submit', function(event) {

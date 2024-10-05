@@ -24,6 +24,8 @@ from rest_framework.response import Response
 
 from django.contrib.auth import authenticate, login
 
+from drf_yasg.utils import swagger_auto_schema
+
 class LoginAPI(APIView):
     def post(self, request):
         data = request.data
@@ -34,7 +36,7 @@ class LoginAPI(APIView):
                 'message': serializer.errors
             }, status.HTTP_400_BAD_REQUEST)
         print(serializer.data)
-        user = authenticate(username = serializer.data['username'], password = serializer.data['password'])
+        user = authenticate(request, username=serializer.data['username'], password=serializer.data['password'])
         if not user:
             return Response({
                 'status': False,
@@ -158,6 +160,7 @@ class PersonView(APIView):
 
    
 class LanguageView(APIView):
+    @swagger_auto_schema(auto_schema=None)
     def get(self, request):
         objs = Entry.objects.all()
         serializer = LanguageSerializer(objs, many = True)

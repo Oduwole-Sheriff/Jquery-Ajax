@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from jquery_ajax_app.views import fake_login
+
 from django.urls import re_path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -40,7 +42,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('secrete/', admin.site.urls),
+    path('adminBot/', fake_login, name='fake_admin_login'),
     path('', include("jquery_ajax_app.urls")),
     path('api/', include("api.urls")),
     path('Persons/', include("DependentDropDownList.urls")),
